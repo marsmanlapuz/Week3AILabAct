@@ -1,0 +1,31 @@
+ACTIVITY 1
+
+1. Function check_borrowingQuestion: Write a function check_borrowing(overdue_books, status) that returns "Borrowing allowed" "Not allowed: books" or "Not allowed: suspended account" based on the rules. Explanation: You will create a function that decides whether a student is eligible to borrow books. If they have books it returns "Not allowed: overdue books". If their account is suspended it returns "Not allowed: suspended account". If their record is no overdue books and active status) it returns "Borrowing allowed".
+
+2. Asking Questions using input() Question: Using input() ask the student for their name whether they have books (yes/no) their status (active/suspended) and how many books they want to borrow. Explanation: The program will prompt the user in the terminal for four pieces of information: Name Whether they have books (yes or no) Account status (active or suspended) Number of books they want to borrow (number)
+
+3. Checking Results and Capping Book Limits Question: Use the result of check_borrowing() to decide what message to show. If borrowing is allowed, also check the number of books requested and cap it at 3 with a warning message if needed. Explanation: The system displays a message based on the functions output. If borrowing is allowed it then checks how many books were requested. The maximum limit is 3. If the student requests than 3 (e.g. 5) the system automatically caps it at 3 and displays a warning message stating that only 3 books are allowed.
+
+4. Wrapping in a while True Loop Question: Wrap everything in a while loop so the kiosk can process multiple students and make it stop when someone types "exit" as their name. Explanation: This keeps the program running so multiple students can use it without restarting. The kiosk session only stops when someone enters "exit" as the name.
+
+5. Running Counter for Successful Borrows Question: Keep a running counter of how many students were allowed to borrow books and print the total when the kiosk session ends. Explanation: Set up a variable (e.g. successful_borrows = 0) that increments by +1 every time a student successfully borrows books. When "exit" is typed the program prints the count.
+
+6. Handling Inputs with.lower() Question: What happens if a student types "Yes" of "yes" for overdue books or "Active" instead of "active" for status? How should Aliahs code handle these input variations so the kiosk doesn't break? (Hint: think back to.lower() from the activity.) Explanation: If a student inputs mixed-case text like "Yes" or "Active" Python might throw an error or evaluate the condition incorrectly because it is case-sensitive. Solution: Aliah should use.lower() (..Strip().lower()) on the inputs. This ensures Python converts whatever the user types into lowercase ("yes" "active") before evaluating it.
+
+7. Why Overdue Check is Prioritized Question: The rules say overdue books block borrowing " of status”. Meaning even an active-status student with overdue books is blocked. Why did Aliah write the check as a priority condition and what would go wrong if she checked status first instead? Explanation: Why its prioritized: Resolving books carries more weight. Even if a students status is active unreturned books immediately block them from borrowing. What would go wrong: If status were checked first an active student with books might be passed through to the next check or given an inaccurate message instead of being blocked immediately for having overdue books.
+
+8. Handling Edge Cases (0 Books Requested) Question: What if a student has no books, active status but tries to borrow 0 books? Should the kiosk treat this as input or an error? Modify your code to handle this edge case gracefully. Explanation: If a student is eligible but inputs 0 for books: This should not count as a successful borrow nor should it increment the successful borrow counter (+1). The kiosk should treat this as an edge case. Display a helpful error message, like: "Invalid amount. You must borrow least 1 book."
+
+
+
+
+ACTIVITY 2
+
+1. Why do rule-based systems need explicit override conditions and proper ordering?  
+Rule-based systems need clear override conditions to create a hierarchy of priorities when evaluating logic. This setup helps prevent wrong decisions in special cases. If Aliah puts the override check after the standard time or item checks, it leads to "unreachable code." In this scenario, special permissions are blocked before they are ever considered. For example, checking operating hours first might mark the status as "CLOSED," mistakenly denying a student with a valid Teacher's Pass.
+
+2. What if two rules conflict (sample Teacher's Pass vs. Closed for Cleaning)?  
+When rules directly conflict—like a student with a Teacher's Pass while the cafeteria is "Closed for Sanitation"—the system must prioritize safety and health rules over all permissions. In real-world situations, safety regulations always take priority over special access privileges.
+
+3. How would Aliah's program need to change to handle a rule that overrides even the teacher's pass?  
+To manage these multi-layered exceptions properly, Aliah needs to change her if-elif-else control flow. She must place critical safety overrides at the top of her conditions, followed by special permission overrides, and then the standard operational rules.
